@@ -21,6 +21,20 @@ void loadHud(t_hud& hud)
 
 }
 
+void loadSound(t_sound& sound)
+{
+	sound.hitBuffer.loadFromFile("wav/hit.wav");
+	sound.hit.setBuffer(sound.hitBuffer);
+
+	sound.scoreBuffer.loadFromFile("wav/score.wav");
+	sound.score.setBuffer(sound.scoreBuffer);
+
+	sound.lostBuffer.loadFromFile("wav/lost.wav");
+	sound.lost.setBuffer(sound.lostBuffer);
+
+	sound.music.openFromFile("wav/bgMusic.mp3");
+}
+
 void refreshWindow(RenderWindow& window, Bat& bat, Ball& ball, t_hud& hud)
 {
 
@@ -53,17 +67,19 @@ void updateHud(t_hud& hud, t_game& game, Time dt)
 	}
 }
 
-void checkCollision(RenderWindow& window, t_game& game, Ball& ball, Bat& bat)
+void checkCollision(RenderWindow& window, t_game& game, t_sound& sound, Ball& ball, Bat& bat)
 {
 	if (ball.getPosition().top < 0)
 	{
 		ball.reboundBatorTop();
+		sound.score.play();
 		game.score++;
 	}
 	else if (ball.getPosition().top > window.getSize().y)
 	{
 		ball.reboundBottom();
 		game.lives--;
+		sound.lost.play();
 		if (game.lives < 1)
 		{
 			game.score = 0;
@@ -72,6 +88,7 @@ void checkCollision(RenderWindow& window, t_game& game, Ball& ball, Bat& bat)
 	}
 	else if (ball.getPosition().intersects(bat.getPosition()))
 	{
+		sound.hit.play();
 		ball.reboundBatorTop();
 	}
 	if (ball.getPosition().left < 0

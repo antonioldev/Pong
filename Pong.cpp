@@ -14,11 +14,14 @@ int main()
 
 	t_game game;
 	t_hud hud;
+	t_sound sound;
 	loadHud(hud);
-	
+	loadSound(sound);
+	sound.music.play();
 	Clock clock;
 	while (window.isOpen())
 	{
+		
 		Event event;
 		while (window.pollEvent(event))
 			if (event.type == Event::Closed)
@@ -32,7 +35,7 @@ int main()
 		ball.update(dt);
 		
 		//Check for collison
-		checkCollision(window, game, ball, bat);
+		checkCollision(window, game, sound, ball, bat);
 
 		//Update the HUD text
 		updateHud(hud, game, dt);
