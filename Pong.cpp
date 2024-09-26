@@ -1,6 +1,7 @@
 
 #include "Pong.hpp"
 #include "Bat.hpp"
+#include "Ball.hpp"
 
 int main()
 {
@@ -9,6 +10,7 @@ int main()
 	RenderWindow window(vm, "Pong", Style::Fullscreen);
 
 	Bat bat(WIDTH / 2, HEIGHT - 20);
+	Ball ball(WIDTH / 2, 0);
 
 	t_game game;
 	t_hud hud;
@@ -22,33 +24,22 @@ int main()
 			if (event.type == Event::Closed)
 				window.close();
 
-		//Handle player quitting
-		if (Keyboard::isKeyPressed(Keyboard::Escape))
-			window.close();
-
-		//Handle player input
-		if (Keyboard::isKeyPressed(Keyboard::Left))
-			bat.moveLeft();
-		else
-			bat.stopLeft();
-		if (Keyboard::isKeyPressed(Keyboard::Right))
-			bat.moveRight();
-		else
-			bat.stopRight();
+		// Call the input handling function
+		handlePlayerInput(window, bat);
+		
 		Time dt = clock.restart();
 		bat.update(dt);
+		ball.update(dt);
+		
+		//Check for collison
+		checkCollision(window, game, ball, bat);
 
 		//Update the HUD text
-		std::stringstream ss;
-		ss << "Score: " << game.score << "    Lives: " << game.lives;
-		hud.text.setString(ss.str());
-
-		//Update the window
-		window.clear();
-		window.draw(hud.text);
+		updateHud(hud, game, dt);
 		
-		window.draw(bat.getShape());
-		window.display();
+		//Update the window
+		refreshWindow(window, bat, ball, hud);
+		
 	}
 	return (0);
 }
