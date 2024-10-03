@@ -11,7 +11,8 @@
 #define WIDTH 1920
 #define HEIGHT 1080
 
-typedef struct s_game {
+typedef struct s_game
+{
 	int score = 0;
 	int lives = 3;
 } t_game;

@@ -53,3 +53,8 @@ void Ball::update(Time dt)
 	_shape.setPosition(_position);
 	_circle.setPosition(_position);
 }
+
+void Ball::increaseSpeed(float add)
+{
+	_speed += add;
+}

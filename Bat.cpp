@@ -3,7 +3,7 @@
 // Bat constructor, takes in the starting x and y position and positions the bat there
 Bat::Bat(float startX, float startY) : _position(startX, startY)
 {
-	_shape.setSize(sf::Vector2f(50, 5));
+	_shape.setSize(sf::Vector2f(150, 5));
 	_shape.setPosition(_position);
 }
 

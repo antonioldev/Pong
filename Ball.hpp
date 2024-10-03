@@ -22,4 +22,5 @@ public:
 	void			reboundBatorTop();
 	void			reboundBottom();
 	void			update(Time dt);
+	void			increaseSpeed(float add);
 };

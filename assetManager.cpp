@@ -8,7 +8,7 @@ void loadHud(t_hud& hud)
 	hud.fontFps.loadFromFile("fonts/CollegiateFLF.ttf");
 
 	hud.text.setFont(hud.fontText);
-	hud.text.setString("Score: 0    Lives : 3");
+	hud.text.setString("Score: 0    Lives: 3");
 	hud.text.setCharacterSize(75);
 	hud.text.setPosition(20, 20);
 	hud.text.setFillColor(Color::White);
@@ -74,6 +74,8 @@ void checkCollision(RenderWindow& window, t_game& game, t_sound& sound, Ball& ba
 		ball.reboundBatorTop();
 		sound.score.play();
 		game.score++;
+		if (game.score % 3 == 0)
+			ball.increaseSpeed(250.0f);
 	}
 	else if (ball.getPosition().top > window.getSize().y)
 	{
@@ -105,11 +107,11 @@ void handlePlayerInput(RenderWindow& window, Bat& bat)
 		window.close();
 
 	//Handle player input
-	if (Keyboard::isKeyPressed(Keyboard::Left))
+	if (Keyboard::isKeyPressed(Keyboard::Left) && bat.getPosition().left > 0 )
 		bat.moveLeft();
 	else
 		bat.stopLeft();
-	if (Keyboard::isKeyPressed(Keyboard::Right))
+	if (Keyboard::isKeyPressed(Keyboard::Right) && ((bat.getPosition().left + bat.getPosition().width) < WIDTH))
 		bat.moveRight();
 	else
 		bat.stopRight();

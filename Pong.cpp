@@ -18,6 +18,7 @@ int main()
 	loadHud(hud);
 	loadSound(sound);
 	sound.music.play();
+	sound.music.setLoop(true);
 	Clock clock;
 	while (window.isOpen())
 	{
