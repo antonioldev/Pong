@@ -15,3 +15,6 @@ Throughout these projects, I used the SFML (Simple and Fast Multimedia Library),
 - **Windowing**: Creating and managing game windows. SFML provides a straightforward way to create windows and handle events such as resizing and closing.
 - **Audio**: Playing sound effects and music. SFML supports various audio formats and allows for easy playback and control of sounds.
 - **Input**: Handling keyboard, mouse, and joystick input. SFML simplifies the process of capturing and responding to user inputs.
+
+## Screenshot
+![Pong screenshot](https://github.com/antonioldev/Pong/blob/master/Screenshot1.png)
